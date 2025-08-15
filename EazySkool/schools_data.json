@@ -1,0 +1,235 @@
+{
+  "schools": [
+    {
+      "id": 4,
+      "name": "Sciences Po Strasbourg",
+      "description": "Sciences Po Strasbourg forme les futurs cadres de la fonction publique et du secteur privé.",
+      "website": "https://www.sciencespo-strasbourg.fr/",
+      "email": "contact@sciencespo-strasbourg.fr",
+      "phone": "03 68 85 84 00",
+      "address": "47 avenue de la Forêt-Noire, 67082 Strasbourg",
+      "latitude": 48.5846,
+      "longitude": 7.7616,
+      "average_rating": 4.7,
+      "total_reviews": 203,
+      "type_name": "Institut d'études politiques",
+      "city_name": "Strasbourg",
+      "region": "Grand Est",
+      "specializations": [
+        "Droit",
+        "Commerce"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Université de Strasbourg",
+      "description": "L'Université de Strasbourg est l'une des plus grandes universités de France, reconnue pour la qualité de son enseignement et de sa recherche.",
+      "website": "https://www.unistra.fr/",
+      "email": "contact@unistra.fr",
+      "phone": "03 68 85 00 00",
+      "address": "4 rue Blaise Pascal, 67081 Strasbourg",
+      "latitude": 48.5839,
+      "longitude": 7.7455,
+      "average_rating": 4.6,
+      "total_reviews": 127,
+      "type_name": "Université",
+      "city_name": "Strasbourg",
+      "region": "Grand Est",
+      "specializations": [
+        "Informatique",
+        "Droit",
+        "Sciences",
+        "Langues"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "ICN Business School",
+      "description": "ICN Business School est une grande école de management reconnue internationalement.",
+      "website": "https://www.icn-artem.com/",
+      "email": "contact@icn-artem.com",
+      "phone": "03 54 50 25 00",
+      "address": "86 rue du Sergent Blandan, 54003 Nancy",
+      "latitude": 48.6937,
+      "longitude": 6.1843,
+      "average_rating": 4.5,
+      "total_reviews": 156,
+      "type_name": "École de commerce",
+      "city_name": "Nancy",
+      "region": "Grand Est",
+      "specializations": [
+        "Commerce"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "INSA Strasbourg",
+      "description": "L'INSA Strasbourg forme des ingénieurs dans de nombreux domaines techniques.",
+      "website": "https://www.insa-strasbourg.fr/",
+      "email": "contact@insa-strasbourg.fr",
+      "phone": "03 88 14 47 00",
+      "address": "24 boulevard de la Victoire, 67084 Strasbourg",
+      "latitude": 48.584,
+      "longitude": 7.746,
+      "average_rating": 4.4,
+      "total_reviews": 134,
+      "type_name": "École d'ingénieur",
+      "city_name": "Strasbourg",
+      "region": "Grand Est",
+      "specializations": [
+        "Informatique",
+        "Ingénierie"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Université de Lorraine",
+      "description": "L'Université de Lorraine propose une offre de formation complète et innovante dans de nombreux domaines.",
+      "website": "https://www.univ-lorraine.fr/",
+      "email": "contact@univ-lorraine.fr",
+      "phone": "03 72 74 00 00",
+      "address": "34 cours Léopold, 54000 Nancy",
+      "latitude": 48.6921,
+      "longitude": 6.1844,
+      "average_rating": 4.3,
+      "total_reviews": 89,
+      "type_name": "Université",
+      "city_name": "Nancy",
+      "region": "Grand Est",
+      "specializations": [
+        "Informatique",
+        "Commerce",
+        "Ingénierie",
+        "Sciences"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Université de Haute-Alsace",
+      "description": "L'Université de Haute-Alsace est reconnue pour ses formations en sciences, technologies et ingénierie.",
+      "website": "https://www.uha.fr/",
+      "email": "contact@uha.fr",
+      "phone": "03 89 33 64 00",
+      "address": "2 rue des Frères Lumière, 68093 Mulhouse",
+      "latitude": 47.7508,
+      "longitude": 7.3359,
+      "average_rating": 4.2,
+      "total_reviews": 67,
+      "type_name": "Université",
+      "city_name": "Mulhouse",
+      "region": "Grand Est",
+      "specializations": [
+        "Informatique",
+        "Ingénierie",
+        "Sciences"
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Université de Reims Champagne-Ardenne",
+      "description": "L'URCA propose des formations dans tous les domaines de la connaissance.",
+      "website": "https://www.univ-reims.fr/",
+      "email": "contact@univ-reims.fr",
+      "phone": "03 26 91 30 00",
+      "address": "Campus Croix-Rouge, 51100 Reims",
+      "latitude": 49.2583,
+      "longitude": 4.0317,
+      "average_rating": 4.1,
+      "total_reviews": 78,
+      "type_name": "Université",
+      "city_name": "Reims",
+      "region": "Grand Est",
+      "specializations": [
+        "Informatique",
+        "Médecine",
+        "Sciences"
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Université de Troyes",
+      "description": "L'UTT est spécialisée dans les technologies et l'innovation.",
+      "website": "https://www.utt.fr/",
+      "email": "contact@utt.fr",
+      "phone": "03 25 71 76 00",
+      "address": "12 rue Marie Curie, 10004 Troyes",
+      "latitude": 48.2973,
+      "longitude": 4.0744,
+      "average_rating": 4,
+      "total_reviews": 45,
+      "type_name": "Université",
+      "city_name": "Troyes",
+      "region": "Grand Est",
+      "specializations": [
+        "Informatique",
+        "Ingénierie",
+        "Sciences"
+      ]
+    }
+  ],
+  "cities": [
+    {
+      "id": 4,
+      "name": "Metz",
+      "region": "Grand Est"
+    },
+    {
+      "id": 3,
+      "name": "Mulhouse",
+      "region": "Grand Est"
+    },
+    {
+      "id": 2,
+      "name": "Nancy",
+      "region": "Grand Est"
+    },
+    {
+      "id": 5,
+      "name": "Reims",
+      "region": "Grand Est"
+    },
+    {
+      "id": 1,
+      "name": "Strasbourg",
+      "region": "Grand Est"
+    },
+    {
+      "id": 6,
+      "name": "Troyes",
+      "region": "Grand Est"
+    }
+  ],
+  "school_types": [
+    {
+      "id": 3,
+      "name": "Institut d'études politiques",
+      "description": "École spécialisée en sciences politiques"
+    },
+    {
+      "id": 1,
+      "name": "Université",
+      "description": "Établissement public d'enseignement supérieur"
+    },
+    {
+      "id": 5,
+      "name": "École d'art",
+      "description": "École spécialisée dans les arts"
+    },
+    {
+      "id": 4,
+      "name": "École d'ingénieur",
+      "description": "École spécialisée en ingénierie"
+    },
+    {
+      "id": 2,
+      "name": "École de commerce",
+      "description": "École spécialisée dans le management et le commerce"
+    },
+    {
+      "id": 6,
+      "name": "École de santé",
+      "description": "École spécialisée dans les métiers de la santé"
+    }
+  ],
+  "events": []
+}

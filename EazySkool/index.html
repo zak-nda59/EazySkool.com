@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EazySkool</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <style>
+    /* Splash auto-hide même si JS plante */
+    #splash-screen.splash-auto-hide {
+      animation: splashFadeOut 0.7s 2s forwards;
+    }
+    @keyframes splashFadeOut {
+      to {
+        opacity: 0;
+        pointer-events: none;
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Splash screen de chargement -->
+  <div id="splash-screen" class="splash-auto-hide">
+    <div class="splash-content">
+      <div class="splash-logo">
+        <svg width="90" height="90" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="7" y="20" width="56" height="32" rx="10" fill="#2563eb"/>
+          <rect x="14" y="28" width="42" height="16" rx="6" fill="#a78bfa"/>
+          <circle cx="35" cy="36" r="6" fill="#f59e42"/>
+          <rect x="22" y="50" width="26" height="6" rx="3" fill="#22c55e"/>
+        </svg>
+      </div>
+      <div class="splash-spinner">
+        <div class="spinner"></div>
+      </div>
+      <div class="splash-title">EazySkool</div>
+    </div>
+  </div>
+  <!-- Navigation principale -->
+  <nav class="main-nav">
+    <div class="nav-logo">
+      <svg width="40" height="40" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="7" y="20" width="56" height="32" rx="10" fill="#2563eb"/>
+        <rect x="14" y="28" width="42" height="16" rx="6" fill="#a78bfa"/>
+        <circle cx="35" cy="36" r="6" fill="#f59e42"/>
+        <rect x="22" y="50" width="26" height="6" rx="3" fill="#22c55e"/>
+      </svg>
+      <span>EazySkool</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#" class="nav-link active" data-section="home"><i class="fa-solid fa-house"></i> Accueil</a></li>
+      <li><a href="#" class="nav-link" data-section="schools"><i class="fa-solid fa-school"></i> Recherche d'écoles</a></li>
+      <li><a href="#" class="nav-link" data-section="ia"><i class="fa-solid fa-robot"></i> IA Conseiller</a></li>
+      <li><a href="#" class="nav-link" data-section="favorites"><i class="fa-solid fa-star"></i> Favoris</a></li>
+      <li><a href="#" class="nav-link" data-section="account"><i class="fa-solid fa-user"></i> Compte</a></li>
+    </ul>
+    <div class="nav-auth">
+      <div id="user-info" style="display:none;">
+        <!-- Les infos de l'utilisateur connecté seront injectées ici -->
+      </div>
+    </div>
+  </nav>
+
+  <!-- Sections SPA -->
+  <main>
+    <div id="alert-message" style="display:none; margin:0 auto 18px auto; max-width:600px; background:#fee2e2; color:#b91c1c; border:1.5px solid #fca5a5; border-radius:10px; padding:12px 18px; font-weight:600; text-align:center;"></div>
+    <section id="section-home" class="spa-section">
+      <div class="main-landscape">
+        <aside class="sidebar sidebar-left">
+          <div class="sidebar-widget">
+            <h3><i class="fa-solid fa-calendar-days"></i> Événements à venir</h3>
+            <ul style="list-style:none;padding:0;margin:0;font-size:0.97em;">
+              <li><b>Portes ouvertes</b> – 27/09 à Nancy</li>
+              <li><b>Salon étudiant</b> – 05/10 à Strasbourg</li>
+              <li><b>Webinaire orientation</b> – 12/10 (en ligne)</li>
+            </ul>
+          </div>
+          <div class="sidebar-widget">
+            <h3><i class="fa-solid fa-lightbulb"></i> Astuce orientation</h3>
+            <div style="font-size:0.98em;color:#555;">“N’hésite pas à contacter les anciens élèves pour avoir leur retour sur l’école !”</div>
+          </div>
+        </aside>
+        <div class="container">
+          <div class="header">  
+            <div class="logo">
+              <svg width="70" height="70" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="7" y="20" width="56" height="32" rx="10" fill="#2563eb"/>
+                <rect x="14" y="28" width="42" height="16" rx="6" fill="#a78bfa"/>
+                <circle cx="35" cy="36" r="6" fill="#f59e42"/>
+                <rect x="22" y="50" width="26" height="6" rx="3" fill="#22c55e"/>
+              </svg>
+            </div>
+            <h1>EazySkool</h1>
+            <p>Découvrez les meilleures écoles et leurs avis. Créez un compte pour rejoindre notre communauté !</p>
+          </div>
+          <div class="about">
+            <div class="section-title"><i class="fa-solid fa-info-circle"></i> À propos</div>
+            <p>EazySkool est une plateforme communautaire pour découvrir, comparer et noter les écoles. Notre mission : aider chaque élève à trouver l'établissement qui lui correspond vraiment !</p>
+          </div>
+          <div class="contact">
+            <div class="section-title"><i class="fa-solid fa-envelope"></i> Contact rapide</div>
+            <p>Une question ? <a href="mailto:contact@eazyskool.com">contact@eazyskool.com</a><br>
+            <i class="fa-brands fa-discord"></i> <a href="#">Rejoindre notre Discord</a></p>
+          </div>
+        </div>
+        <aside class="sidebar sidebar-right">
+          <div class="sidebar-widget">
+            <h3><i class="fa-solid fa-lightbulb"></i> Conseil du jour</h3>
+            <div style="font-size:0.98em;color:#555;">“Prends le temps de visiter les campus avant de faire ton choix !”</div>
+          </div>
+          <div class="sidebar-widget">
+            <h3><i class="fa-solid fa-comment-dots"></i> Derniers avis postés</h3>
+            <div style="font-size:0.97em;margin-bottom:8px;"><b>Sarah L.</b> (Nancy) : <i>“Super ambiance à l’ICN !”</i></div>
+            <div style="font-size:0.97em;margin-bottom:8px;"><b>Yassine B.</b> (Strasbourg) : <i>“Profs à l’écoute, je recommande.”</i></div>
+            <div style="font-size:0.97em;"><b>Emma T.</b> (Mulhouse) : <i>“Beaucoup d’assos étudiantes !”</i></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="section-schools" class="spa-section" style="display:none;">
+      <div class="page-header">
+        <h2><i class="fa-solid fa-school"></i> Recherche d'écoles</h2>
+        <div id="schools-filters-top">
+          <form id="school-search-form" class="school-search-form" autocomplete="off">
+            <input type="text" id="school-search-input" placeholder="Rechercher une école par nom..." />
+            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i></button>
+            <button type="button" class="btn btn-secondary" id="school-search-reset">Réinitialiser</button>
+          </form>
+        </div>
+      </div>
+      <div class="schools-layout">
+        <!-- Sidebar Gauche : Filtres -->
+        <aside class="sidebar sidebar-left">
+          <div class="sidebar-widget">
+            <h3><i class="fa-solid fa-filter"></i> Filtrer et Trier</h3>
+            <div id="filters-controls">
+              <div class="filter-group">
+                <label for="sort-by">Trier par</label>
+                <select id="sort-by" class="filter-control">
+                  <option value="avis-desc">Popularité (meilleure note)</option>
+                  <option value="nom-asc">Nom (A-Z)</option>
+                  <option value="nom-desc">Nom (Z-A)</option>
+                </select>
+              </div>
+              <div id="filters-container">
+                <!-- Les filtres (ville, type) seront injectés ici par JS -->
+              </div>
+              <div class="filter-group">
+                <button id="reset-filters" class="btn btn-secondary" style="width:100%;">
+                  <i class="fa-solid fa-rotate-left"></i> Réinitialiser les filtres
+                </button>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Contenu Principal : Liste des écoles -->
+        <main class="schools-list-container" id="schools-list-main">
+          <div id="schools-list">
+            <!-- Les fiches des écoles seront injectées ici -->
+          </div>
+          <div id="pagination-container"></div>
+        </main>
+
+        <!-- Sidebar Droite : Contenu Dynamique -->
+        <aside class="sidebar sidebar-right">
+          <!-- Carte interactive -->
+          <div class="sidebar-widget" id="map-widget">
+            <h3><i class="fa-solid fa-map-location-dot"></i> Carte des écoles</h3>
+            <div id="map">
+              <div id="map-overlay">
+                <button id="open-big-map" class="btn btn-primary btn-open-map">
+                  <i class="fa-solid fa-up-right-and-down-left-from-center"></i> Voir la carte interactive
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- Dernières visites -->
+          <div class="sidebar-widget">
+            <h3><i class="fa-solid fa-clock-rotate-left"></i> Vos dernières visites</h3>
+            <div id="last-viewed-content">
+              <div class="last-viewed-item">
+                <img src="images/strasbourg.jpg" alt="Université de Strasbourg" />
+                <div class="last-viewed-info">
+                  <div class="last-viewed-name">Université de Strasbourg</div>
+                  <div class="last-viewed-time">Il y a 2 minutes</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="section-ia" class="spa-section" style="display:none;">
+      <div class="ia-advisor-page">
+        <div class="card ia-advisor" style="max-width:600px;margin:40px auto;">
+          <h2><i class="fa-solid fa-robot"></i> Conseiller IA</h2>
+          <div id="ia-chat" class="ia-chat">
+            <div class="ia-message ia-message-bot">Bonjour ! Je suis ton conseiller d'orientation. Dis-moi le métier ou le domaine qui t'intéresse, et je te propose des écoles ou filières adaptées !</div>
+          </div>
+          <form id="ia-form" class="ia-form" autocomplete="off">
+            <input type="text" id="ia-input" placeholder="Ex: Informatique, médecine, droit..." required />
+            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i></button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section id="section-favorites" class="spa-section" style="display:none;">
+      <div class="favorites-list-container">
+        <h2><i class="fa-solid fa-star"></i> Mes écoles favorites</h2>
+        <div id="favorites-list"></div>
+      </div>
+    </section>
+
+    <section id="section-account" class="spa-section" style="display:none;">
+      <div class="page-header">
+        <h2><i class="fa-solid fa-user-circle"></i> Mon Compte</h2>
+      </div>
+
+      <div id="account-content">
+        <!-- Si l'utilisateur est connecté -->
+        <div id="user-dashboard" style="display:none;">
+          <div class="account-grid">
+            <!-- Section Résumé -->
+            <div class="account-widget summary-widget">
+              <h3>Résumé</h3>
+              <p><i class="fa-solid fa-star"></i> Vous avez <strong id="fav-count">0</strong> école(s) en favori.</p>
+            </div>
+
+            <!-- Section Infos Perso -->
+            <div class="account-widget info-widget">
+              <h3>Mes informations</h3>
+              <p><i class="fa-solid fa-envelope"></i> Email : <strong id="user-email"></strong></p>
+              <button class="btn btn-secondary" disabled>Changer de mot de passe (bientôt)</button>
+            </div>
+          </div>
+
+          <div class="account-widget favorites-widget">
+            <h3><i class="fa-solid fa-star"></i> Mes écoles favorites</h3>
+            <div id="account-favorites-list">
+              <!-- La liste des favoris sera injectée ici -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Si l'utilisateur n'est pas connecté -->
+        <div id="logged-out-account-view">
+          <div class="empty-state">
+            <i class="fa-solid fa-right-to-bracket"></i>
+            <h3>Connectez-vous à votre compte</h3>
+            <p>Créez un compte ou connectez-vous pour sauvegarder vos écoles favorites et accéder à votre espace personnel.</p>
+            <div class="account-actions">
+              <button class="btn btn-primary" id="open-login-btn-account"><i class="fa-solid fa-right-to-bracket"></i> Se connecter</button>
+              <button class="btn btn-secondary" id="open-register-btn-account"><i class="fa-solid fa-user-plus"></i> Créer un compte</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modale pour la grande carte -->
+  <div class="modal" id="map-modal" style="display:none;">
+    <div class="modal-content large">
+      <div id="modal-map"></div>
+      <span class="modal-close" id="close-map-modal">&times;</span>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>EazySkool</h3>
+        <p>Trouvez l'école de vos rêves dans le Grand Est. Notre plateforme vous aide à découvrir et comparer les meilleures écoles de la région.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Navigation</h3>
+        <ul>
+          <li><a href="#" data-section="home">Accueil</a></li>
+          <li><a href="#" data-section="schools">Recherche d'écoles</a></li>
+          <li><a href="#" data-section="ia">IA Conseiller</a></li>
+          <li><a href="#" data-section="favorites">Favoris</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Contact</h3>
+        <ul>
+          <li><i class="fa-solid fa-envelope"></i> contact@eazyskool.fr</li>
+          <li><i class="fa-solid fa-phone"></i> 03 00 00 00 00</li>
+          <li><i class="fa-solid fa-location-dot"></i> Grand Est, France</li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Suivez-nous</h3>
+        <div class="social-links">
+          <a href="#" class="social-link"><i class="fa-brands fa-facebook"></i></a>
+          <a href="#" class="social-link"><i class="fa-brands fa-twitter"></i></a>
+          <a href="#" class="social-link"><i class="fa-brands fa-linkedin"></i></a>
+          <a href="#" class="social-link"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 EazySkool - Tous droits réservés</p>
+    </div>
+  </footer>
+
+  <!-- Modales login/register -->
+  <div class="modal" id="modal-login">
+    <div class="modal-content">
+      <span class="modal-close" id="close-login">&times;</span>
+      <h2>Connexion</h2>
+      <form id="login-form" autocomplete="off">
+        <div class="form-group">
+          <input type="email" id="login-email" name="email" placeholder="Email" required />
+        </div>
+        <div class="form-group">
+          <input type="password" id="login-password" name="password" placeholder="Mot de passe" required />
+        </div>
+        <button type="submit" class="btn btn-primary">Se connecter</button>
+      </form>
+      <p class="modal-footer-text">Pas encore de compte ? <button class="btn-link" id="switch-to-register">Créer un compte</button></p>
+    </div>
+  </div>
+
+  <div class="modal" id="modal-register">
+    <div class="modal-content">
+      <span class="modal-close" id="close-register">&times;</span>
+      <h2>Créer un compte</h2>
+      <form id="register-form" autocomplete="off">
+        <div class="form-group">
+          <input type="email" id="register-email" name="email" placeholder="Email" required />
+        </div>
+        <div class="form-group">
+          <input type="password" id="register-password" name="password" placeholder="Mot de passe" required />
+        </div>
+        <button type="submit" class="btn btn-primary">Créer mon compte</button>
+      </form>
+      <p class="modal-footer-text">Déjà inscrit ? <button class="btn-link" id="switch-to-login">Se connecter</button></p>
+    </div>
+  </div>
+
+  <!-- Modale fiche école -->
+  <div class="modal" id="school-modal" style="display:none;">
+    <div class="modal-content" id="school-modal-body">
+      <!-- Le contenu de la fiche est injecté par JS -->
+    </div>
+    <span class="modal-close" id="close-school-modal">&times;</span>
+  </div>
+
+  <!-- Le template pour la fiche école, qui sera utilisé par JS -->
+  <template id="school-modal-template">
+    <div class="school-modal-slider"></div>
+    <div class="school-modal-main-content">
+      <div class="school-modal-header">
+        <h2 class="school-modal-title"></h2>
+        <div class="school-modal-avg-rating"></div>
+      </div>
+      <div class="school-modal-meta"></div>
+      <div class="school-modal-desc"></div>
+      <div class="school-modal-contact"></div>
+      <div class="school-modal-actions"></div>
+    </div>
+    <div class="school-modal-reviews-section">
+      <h3><i class="fa-solid fa-comments"></i> Avis des utilisateurs</h3>
+      <div id="review-form-container">
+        <!-- Le formulaire d'avis sera injecté ici -->
+      </div>
+      <div id="reviews-list">
+        <!-- La liste des avis sera injectée ici -->
+      </div>
+    </div>
+  </template>
+
+  <!-- Barre de progression -->
+  <div id="progress-bar"></div>
+
+  <!-- Toast Container -->
+  <div id="toast-container"></div>
+
+  <script src="script.js"></script>
+</body>
+</html> 
